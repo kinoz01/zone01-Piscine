@@ -14,8 +14,8 @@ func main() {
 		fmt.Println()
 		return
 	}
-	for _, char := range union {
-		found = false
+	for _, char := range union { // range over union
+		found = false            // use found so we don't add similar characters
 		for _, n := range result {
 			if char == n {
 				found = true
@@ -28,3 +28,5 @@ func main() {
 	}
 	fmt.Println(string(result))
 }
+
+// checkpoint
