@@ -15,7 +15,7 @@ func main() {
 		return
 	}
 	for _, char := range union { // range over union
-		found = false            // use found so we don't add similar characters
+		found = false        // use found so we don't add similar characters
 		for _, n := range result {
 			if char == n {
 				found = true
