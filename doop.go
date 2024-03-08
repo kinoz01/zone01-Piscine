@@ -1,11 +1,12 @@
 package main
 
 import "os"
-
 // import "fmt"
 
-const maxInt = int(^uint(0) >> 1)
-const minInt = -maxInt - 1
+const (
+	maxInt = int(^uint(0) >> 1)
+	minInt = -maxInt - 1
+)
 
 func main() {
 	arg := os.Args[1:]
@@ -62,14 +63,14 @@ func doop(s0, o, s2 string) string {
 			return "No division by 0"
 		}
 		div = n1 / n2
-		return itoaa(div)+"\n"
+		return itoaa(div) + "\n"
 	}
 	if o == "+" {
 		if addCheck(n1, n2) {
 			return ""
 		}
 		plus = n1 + n2
-		return itoaa(plus)+"\n"
+		return itoaa(plus) + "\n"
 	}
 	if o == "*" {
 		if multipCheck(n1, n2) {
@@ -79,14 +80,14 @@ func doop(s0, o, s2 string) string {
 			return "0"
 		}
 		product = n1 * n2
-		return itoaa(product)+"\n"
+		return itoaa(product) + "\n"
 	}
 	if o == "-" {
 		if subCheck(n1, n2) {
 			return ""
 		}
 		moin = n1 - n2
-		return itoaa(moin)+"\n"
+		return itoaa(moin) + "\n"
 	}
 	return ""
 }
@@ -129,10 +130,10 @@ func atoii(s string) int {
 }
 
 func addCheck(a, b int) bool {
-	if a > 0 && b > 0 && a + b > maxInt{
+	if a > 0 && b > 0 && a+b > maxInt {
 		return true // overflow
 	}
-	if a < 0 && b < 0 && a - b < minInt{
+	if a < 0 && b < 0 && a-b < minInt {
 		return true // underflow
 	}
 	return false // no overflow
@@ -149,16 +150,16 @@ func subCheck(a, b int) bool {
 }
 
 func multipCheck(a, b int) bool {
-	if a > 0 && b > 0 && a * b > maxInt {
+	if a > 0 && b > 0 && a*b > maxInt {
 		return true // Overflow
 	}
-	if a < 0 && b < 0 && a * b < maxInt {
+	if a < 0 && b < 0 && a*b < maxInt {
 		return true // Overflow
 	}
-	if a < 0 && b > 0 && a * b < minInt {
+	if a < 0 && b > 0 && a*b < minInt {
 		return true // Underflow
 	}
-	if a > 0 && b < 0 && b * a < minInt {
+	if a > 0 && b < 0 && b*a < minInt {
 		return true // Underflow
 	}
 	return false
