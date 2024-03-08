@@ -1,6 +1,7 @@
 package main
 
 import "os"
+
 // import "fmt"
 
 const (
@@ -9,12 +10,18 @@ const (
 )
 
 func main() {
+	// max int in 64bit:
+	// 9223372036854775807 (len(s)=19)
+	// fmt.Println(atoii("92233720368547758099")) atoii here won't refuse overflow number which forced me to hardcode a check for overflow in the string
+	// fmt.Println(itoaa(9223372036854775808))
+	// fmt.Println(maxInt-1)
+	// fmt.Println(minInt+1)
 	arg := os.Args[1:]
 	if len(arg) != 3 {
 		return
 	}
 	result := doop(arg[0], arg[1], arg[2])
-	os.Stdout.WriteString(result)
+	os.Stdout.WriteString(result) // we use standard output with writestring instead of fmt
 }
 
 func doop(s0, o, s2 string) string {
@@ -35,7 +42,6 @@ func doop(s0, o, s2 string) string {
 			continue
 		}
 		if s0[i] > '9' || s0[i] < '0' {
-
 			return ""
 		}
 	}
@@ -45,22 +51,45 @@ func doop(s0, o, s2 string) string {
 			continue
 		}
 		if s2[i] > '9' || s2[i] < '0' {
-
 			return ""
 		}
 	}
+	/********** in this lines i need to remove overflow before  using atoii cuz the number will change ***********/
+	if len(s0) > 19 || len(s2) > 19 {
+		return ""
+	}
+	if s0[0] == '-' || s0[0] == '+' {
+		if s0[1] >= '9' && s0[2] >= '2' && s0[3] >= '2' && s0[4] >= '3' && s0[5] >= '3' && s0[6] >= '7' && s0[7] >= '2' && s0[8] >= '0' && s0[9] >= '3' && s0[10] >= '6' && s0[11] >= '8' && s0[12] >= '5' && s0[13] >= '4' && s0[14] >= '7' && s0[15] >= '7' && s0[16] >= '5' && s0[17] >= '8' && s0[18] >= '0' && s0[19] >= '7' {
+			return ""
+		}
+	} else {
+		if s0[0] >= '9' && s0[1] >= '2' && s0[2] >= '2' && s0[3] >= '3' && s0[4] >= '3' && s0[5] >= '7' && s0[6] >= '2' && s0[7] >= '0' && s0[8] >= '3' && s0[9] >= '6' && s0[10] >= '8' && s0[11] >= '5' && s0[12] >= '4' && s0[13] >= '7' && s0[14] >= '7' && s0[15] >= '5' && s0[16] >= '8' && s0[17] >= '0' && s0[18] >= '7' {
+			return ""
+		}
+	}
+	if s2[0] == '-' || s2[0] == '+' {
+		if s2[1] >= '9' && s2[2] >= '2' && s2[3] >= '2' && s2[4] >= '3' && s2[5] >= '3' && s2[6] >= '7' && s2[7] >= '2' && s2[8] >= '0' && s2[9] >= '3' && s2[10] >= '6' && s2[11] >= '8' && s2[12] >= '5' && s2[13] >= '4' && s2[14] >= '7' && s2[15] >= '7' && s2[16] >= '5' && s2[17] >= '8' && s2[18] >= '0' && s2[19] >= '7' {
+			return ""
+		}
+	} else {
+		if s2[0] >= '9' && s2[1] >= '2' && s2[2] >= '2' && s2[3] >= '3' && s2[4] >= '3' && s2[5] >= '7' && s2[6] >= '2' && s2[7] >= '0' && s2[8] >= '3' && s2[9] >= '6' && s2[10] >= '8' && s2[11] >= '5' && s2[12] >= '4' && s2[13] >= '7' && s2[14] >= '7' && s2[15] >= '5' && s2[16] >= '8' && s2[17] >= '0' && s2[18] >= '7' {
+			return ""
+		}
+	}
+	/**************************************************/
+
 	n1 := atoii(s0)
 	n2 := atoii(s2)
 	if o == "%" {
 		if n2 == 0 {
-			return "No modulo by 0"
+			return "No modulo by 0\n"
 		}
 		modulo = n1 % n2
-		return itoaa(modulo)
+		return itoaa(modulo) + "\n"
 	}
 	if o == "/" {
 		if n2 == 0 {
-			return "No division by 0"
+			return "No division by 0\n"
 		}
 		div = n1 / n2
 		return itoaa(div) + "\n"
@@ -77,7 +106,7 @@ func doop(s0, o, s2 string) string {
 			return ""
 		}
 		if n2 == 0 || n1 == 0 {
-			return "0"
+			return "0\n"
 		}
 		product = n1 * n2
 		return itoaa(product) + "\n"
@@ -129,11 +158,12 @@ func atoii(s string) int {
 	return n * sign
 }
 
+/************** checking if operation will give overflow ************************/
 func addCheck(a, b int) bool {
-	if a > 0 && b > 0 && a+b > maxInt {
+	if a > 0 && b > 0 && a > maxInt-b {
 		return true // overflow
 	}
-	if a < 0 && b < 0 && a-b < minInt {
+	if a < 0 && b < 0 && a < minInt+b {
 		return true // underflow
 	}
 	return false // no overflow
@@ -141,26 +171,26 @@ func addCheck(a, b int) bool {
 
 func subCheck(a, b int) bool {
 	if a < 0 && b > 0 && minInt+a < -b {
-		return true // Underflow
+		return true
 	}
 	if a > 0 && b < 0 && maxInt-a < -b {
-		return true // Overflow
+		return true
 	}
 	return false
 }
 
 func multipCheck(a, b int) bool {
 	if a > 0 && b > 0 && a*b > maxInt {
-		return true // Overflow
+		return true
 	}
 	if a < 0 && b < 0 && a*b < maxInt {
-		return true // Overflow
+		return true
 	}
 	if a < 0 && b > 0 && a*b < minInt {
-		return true // Underflow
+		return true
 	}
 	if a > 0 && b < 0 && b*a < minInt {
-		return true // Underflow
+		return true
 	}
 	return false
 }
