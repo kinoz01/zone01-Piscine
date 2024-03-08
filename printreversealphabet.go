@@ -9,4 +9,4 @@ func main() {
 	z01.PrintRune('\n')
 }
 
-// quest 2
+// quest 2.
