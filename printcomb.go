@@ -31,4 +31,4 @@ func PrintComb() {
 
 // method using i!='7' || j!='8' || k!='9' to exclude 789
 //
-// quest 2
+// quest 2.
