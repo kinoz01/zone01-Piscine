@@ -30,4 +30,4 @@ func main() {
 	PrintComb()
 }
 
-// quest 2
+// quest 2.
