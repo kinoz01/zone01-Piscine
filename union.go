@@ -13,7 +13,7 @@ func main() {
 		fmt.Println()
 		return
 	}
-	for _, char := range union { // range over union string
+	for _, char := range union { // range over union
 		found := false        // use found so we don't add similar characters
 		for _, n := range result {
 			if char == n {
