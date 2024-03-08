@@ -1,9 +1,11 @@
 package main
 
-import "strconv"
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
-func fromto(from int, to int) string{
+func fromto(from int, to int) string {
 
 	var result string
 
@@ -13,11 +15,11 @@ func fromto(from int, to int) string{
 	if from > to {
 		for i := from; i >= to; i-- {
 			if i < 10 {
-				result += "0" + strconv.Itoa(i) 
+				result += "0" + strconv.Itoa(i)
 			} else {
 				result += strconv.Itoa(i)
 			}
-			if i!=to{
+			if i != to {
 				result += ", "
 			}
 		}
@@ -25,11 +27,11 @@ func fromto(from int, to int) string{
 	if from < to {
 		for i := from; i <= to; i++ {
 			if i < 10 {
-				result = result + "0" + strconv.Itoa(i) 
+				result = result + "0" + strconv.Itoa(i)
 			} else {
 				result = result + strconv.Itoa(i)
 			}
-			if i!=to{
+			if i != to {
 				result += ", "
 			}
 		}
@@ -37,7 +39,7 @@ func fromto(from int, to int) string{
 	if from == to {
 		result = strconv.Itoa(to)
 	}
-	return result+"\n"
+	return result + "\n"
 }
 
 func main() {
@@ -50,3 +52,5 @@ func main() {
 	fmt.Print(fromto(15, 5))
 	fmt.Print(fromto(-1, 10))
 }
+
+// checkpoint
