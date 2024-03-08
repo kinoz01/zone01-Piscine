@@ -163,3 +163,5 @@ func multipCheck(a, b int) bool {
 	}
 	return false
 }
+
+// quest 9 / checkpoint
