@@ -39,3 +39,4 @@ func PrintComb2() {
 // o, o2 is for ones, t, t2 for tens
 // ij number = i*10 + j*1
 // xy number = x*10 + y*1
+// quest 2
