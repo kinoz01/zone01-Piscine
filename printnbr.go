@@ -34,4 +34,4 @@ func PrintNbr(n int) {
 	PrintPositiveNum(n)
 }
 
-// quest 2 (itoa)
+// quest 2. (itoa)
