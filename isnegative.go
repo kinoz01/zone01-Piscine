@@ -16,3 +16,5 @@ func IsNegative(nb int) {
 	}
 	z01.PrintRune('\n')
 }
+
+// quest 2

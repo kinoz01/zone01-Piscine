@@ -29,3 +29,5 @@ func PrintComb() {
 func main() {
 	PrintComb()
 }
+
+// quest 2

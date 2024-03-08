@@ -12,11 +12,13 @@ func main() {
 // go mod init go.mod
 // go mod tidy
 
-/* . A rune represents a Unicode code point,
+/* A rune represents a Unicode code point,
 which means it can encode any Unicode character,
 not just ASCII characters. Since Unicode aims to
 include all character sets, this makes runes capable
 of representing virtually any character from any
 language.*/
-
+//
 // https://theasciicode.com.ar/
+// 
+// quest 2
