@@ -27,7 +27,7 @@ func PrintNbr2(n int) {
 		nbr /= 10
 	}
 	if n < 0 {
-		f = "-" + r // we gonna usef to print minus sign
+		f = "-" + r // we gonna use to print minus sign
 		for _, char := range f {
 			z01.PrintRune(char)
 		}
