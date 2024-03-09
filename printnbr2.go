@@ -52,7 +52,7 @@ The integer 65 represents the letter "A" in the ASCII
 and Unicode character sets. Therefore, string(65) in
 Go would result in the string "A".*/
 
-// https://theasciicode.com.ar/
+// https://theasciicode.com.ar
 
 /* the same prinsiple will apply if you use rune(65).
 However While string(65) results in a string containing
