@@ -19,7 +19,7 @@ func main() {
 
 // Quest 3
 
-/***************** why return len(s) won't work for "He!îo"**************************/
+/***************** why return len(s) won't work for "He!îo" **************************/
 /*The len(s) function in Go returns the number of bytes,
 not the number of characters, in a string. Go strings are
 UTF-8 encoded, and UTF-8 is a variable-width encoding,
