@@ -19,6 +19,12 @@ func main() {
 
 // Quest 3
 
+/***************** another way will be *************/
+// func StrLen(s string) int {
+// 	runeS:=[]rune(s)
+// 	return len(runeS)
+// }
+
 /***************** why return len(s) won't work for "He!îo" **************************/
 /*The len(s) function in Go returns the number of bytes,
 not the number of characters, in a string. Go strings are
@@ -30,3 +36,4 @@ In the string "He!îo", most of the characters are
 ASCII and occupy 1 byte each. However, the character î
 is not an ASCII character and is represented in UTF-8
 using two bytes (0xC3 0xAE) */
+
