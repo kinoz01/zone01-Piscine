@@ -18,7 +18,6 @@ func main() {
 }
 
 // Quest 3
-
 /***************** another way will be *************/
 // func StrLen(s string) int {
 // 	runeS:=[]rune(s)
