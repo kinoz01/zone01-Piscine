@@ -3,9 +3,9 @@ package main
 import "fmt"
 
 func IsAlpha(s string) bool {
-	sliceS:=[]rune(s)
-	for i:=0; i<len(sliceS); i++{
-		if sliceS[i]>='A' && sliceS[i]<='Z' || sliceS[i]>='a' && sliceS[i]<='z' || sliceS[i]>='0' && sliceS[i]<='9'{
+	sliceS := []rune(s)
+	for i := 0; i < len(sliceS); i++ {
+		if sliceS[i] >= 'A' && sliceS[i] <= 'Z' || sliceS[i] >= 'a' && sliceS[i] <= 'z' || sliceS[i] >= '0' && sliceS[i] <= '9' {
 			continue
 		} else {
 			return false
@@ -21,3 +21,5 @@ func main() {
 	fmt.Println(IsAlpha("Whatsthis4"))
 
 }
+
+// quest 5
