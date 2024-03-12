@@ -8,13 +8,13 @@ import (
 func main() {
 	args := os.Args[1:]
 	union := args[0] + args[1]
-	var result []rune
-	if len(args) != 2 {
+	result := []rune{}
+	if len(args) != 2 || len(args[0]) == 0 || len(args[1]) == 0 {
 		fmt.Println()
 		return
 	}
 	for _, char := range union { // range over union
-		found := false        // use found so we don't add similar characters
+		found := false // use found so we don't add similar characters
 		for _, n := range result {
 			if char == n {
 				found = true
