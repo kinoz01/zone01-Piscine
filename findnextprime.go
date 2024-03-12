@@ -3,9 +3,9 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(FindNextPrime(5))
+	fmt.Println(FindNextPrime(9))
 	fmt.Println(FindNextPrime(4))
-	fmt.Println(FindNextPrime(111))
+	fmt.Println(FindNextPrime(21))
 }
 
 func FindNextPrime(nb int) int {
@@ -15,8 +15,6 @@ func FindNextPrime(nb int) int {
 	}
 	for i := 0; !isprime(prime); i++ {
 		prime = nb + i
-		isprime(prime)
-
 	}
 	return prime
 }
