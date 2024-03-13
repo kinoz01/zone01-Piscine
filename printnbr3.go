@@ -21,7 +21,7 @@ func printnbr0(n int) {
 	if nbr > 0 {
 		d := nbr % 10
 		printnbr0(nbr / 10)
-		z01.PrintRune(rune(d) + 48) // d int to rune conversion
+		z01.PrintRune(rune(d+48)) // d int to rune conversion
 	}
 }
 
@@ -30,6 +30,9 @@ func main() {
 	PrintNbr(0)
 	PrintNbr(123)
 	z01.PrintRune('\n')
+	// z01.PrintRune(rune(78))
+	// z01.PrintRune(rune(48))
+	// z01.PrintRune(rune(39))
 }
 
 // Quest 2 (using recursion)
