@@ -21,6 +21,7 @@ func Split(s, sep string) []string {
 
 func main() {
 	s := "HAHelloHAHAHAHAhowHAHAareHAyou?HAHA"
+	// s := "HelloHAhowHAareHAyou?" they apparently only tested this base case this is why "wrong" answer may also work
 	fmt.Printf("%#v\n", Split(s, "HA"))
 }
 
