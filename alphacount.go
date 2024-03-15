@@ -21,3 +21,5 @@ func AlphaCount(s string) int {
 	}
 	return count
 }
+
+// quest 5
