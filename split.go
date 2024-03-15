@@ -11,6 +11,7 @@ func Split(s, sep string) []string {
 				r = append(r, s[startIndex:i])
 			}
 			startIndex = i + len(sep)
+			// i+=len(sep) // ADD THIS LINE TO INCLUDE THE "sep"
 		} else if i+len(sep) == len(s) { // treating the case of the last word in case the string doesn't end with "sep"
 			r = append(r, s[startIndex:])
 		}
@@ -19,7 +20,7 @@ func Split(s, sep string) []string {
 }
 
 func main() {
-	s := "HAHelloHAHAhowHAareHAyou?"
+	s := "HAHelloHAHAHAHAhowHAHAareHAyou?HAHA"
 	fmt.Printf("%#v\n", Split(s, "HA"))
 }
 
