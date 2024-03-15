@@ -7,7 +7,7 @@ func SplitWhiteSpaces(s string) []string {
 	index := 0 // representing start of  words
 	for i := 0; i < len(s); i++ {
 		if s[i] == ' ' {
-			if index != i {
+			if s[index] != ' ' { // Don't append white spaces
 				r = append(r, s[index:i])
 			}
 			index = i + 1
