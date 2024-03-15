@@ -4,7 +4,7 @@ import "fmt"
 
 func SplitWhiteSpaces(s string) []string {
 	r := []string{}
-	index := 0
+	index := 0 // representing start of  words
 	for i := 0; i < len(s); i++ {
 		if s[i] == ' ' {
 			if index != i {
