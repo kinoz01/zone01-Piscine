@@ -23,3 +23,6 @@ func main() {
 }
 
 // quest 7
+
+/* "%#v" is a format verb that tells Printf to print the 
+value in a Go-syntax representation.*/
