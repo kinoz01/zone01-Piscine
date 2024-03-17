@@ -64,13 +64,10 @@ func main() {
 			if x > len(runeFile) {
 				fmt.Printf("Number %v exceed file size\n", x)
 				os.Exit(1)
-			}
-			if len(args) == 3 {
-				for j := len(runeFile) - x; j < len(runeFile); j++ {
-					fmt.Printf("%c", runeFile[j])
-				}
 			} else {
-				fmt.Printf("==> %s <==\n", args[i])
+				if len(args) != 3 {
+					fmt.Printf("==> %s <==\n", args[i])
+				}
 				for j := len(runeFile) - x; j < len(runeFile); j++ {
 					fmt.Printf("%c", runeFile[j])
 				}
