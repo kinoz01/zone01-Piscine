@@ -9,8 +9,12 @@ func main() {
 	z01.PrintRune('\n')
 }
 
+// quest 2
+
 // go mod init go.mod
 // go mod tidy
+
+// git pull origin master
 
 /* A rune represents a Unicode code point,
 which means it can encode any Unicode character,
@@ -21,4 +25,4 @@ language.*/
 //
 // https://theasciicode.com.ar/
 // 
-// quest 2.
+
