@@ -33,7 +33,7 @@ func main() {
 	}
 	x := atoii(args[1])
 	errorOccurred := false
-	for i := 2; i < len(args); i++ {
+	for i := 2; i < len(args); i++ { // this loop is for checking errors before printing
 		filePath := args[i]
 		_, err := os.Open(filePath)
 		if err != nil {
@@ -42,28 +42,31 @@ func main() {
 	}
 	for i := 2; i < len(args); i++ {
 		filePath := args[i]
-		file, err := os.Open(filePath)
+		file, err := os.Open(filePath) // open file
 		if err != nil {
 			fmt.Printf("open %s: no such file or directory\n", args[i])
 			if errorOccurred && len(args) >= 4 && i != len(args)-1 {
 				fmt.Printf("\n")
 			}
 		} else {
-			defer file.Close()
-			fileInfo, err := file.Stat()
+			defer file.Close() // close file
+			fileInfo, err := file.Stat() // get file stat
 			if err != nil {
 				errorOccurred = true
 			}
-			fileSize := fileInfo.Size()
+			fileSize := fileInfo.Size() // get file size
 			fileContent := make([]byte, fileSize)
-			_, err = file.Read(fileContent)
+			_, err = file.Read(fileContent) // read file and put it's content in fileContent
 			if err != nil {
 				errorOccurred = true
 			}
 			runeFile := []rune(string(fileContent))
 			if x > len(runeFile) {
-				fmt.Printf("Number %v exceed file size\n", x)
-				os.Exit(1)
+				fmt.Printf("Number %v exceed %s size\n", x, args[i])
+				errorOccurred = true
+				if i != len(args)-1 {
+					fmt.Printf("\n")
+				}
 			} else {
 				if len(args) != 3 {
 					fmt.Printf("==> %s <==\n", args[i])
@@ -83,3 +86,9 @@ func main() {
 }
 
 // quest 8
+
+/* Note: the code is simple but a lot of "if"s are
+added just to keep up with the wanted printed results in
+the examples provided. 
+Restriction on using os package and not using ioutil 
+package like we did in cat.go also made the code longer. */
