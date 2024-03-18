@@ -32,7 +32,7 @@ func main() {
 		os.Exit(1)
 	}
 	x := atoii(args[1])
-	errorOccurred := false
+	errorOccurred := false // this is added so we do continue our loop and we gonna use it lastly to exit lastely using os.Exit(1)
 	for i := 2; i < len(args); i++ { // this loop is for checking errors before printing
 		filePath := args[i]
 		_, err := os.Open(filePath)
