@@ -17,7 +17,7 @@ func main() {
 	fmt.Println(n)
 }
 
-// Quest 3
+// Quest 3 / checkpoint
 /***************** another way will be *************/
 // func StrLen(s string) int {
 // 	runeS:=[]rune(s)
