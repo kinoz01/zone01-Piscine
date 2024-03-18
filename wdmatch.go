@@ -14,7 +14,7 @@ func main() {
 	}
 	c := 0
 	for i := 0; i < len(s1); i++ {
-		j := c // we gonna start our loop from where we found the last character (c=j+1)
+		j := c // we gonna start our loop (searching) from where we found the last character (c=j+1)
 		found := false
 		for j < len(s2) {
 			if s1[i] == s2[j] {
