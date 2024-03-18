@@ -35,4 +35,4 @@ func main() {
 	fmt.Println(TrimAtoi("sdx1+fa2W3s4"))
 }
 
-// quest 5
+// quest 5 / checkpoint
