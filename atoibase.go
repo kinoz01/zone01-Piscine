@@ -28,7 +28,6 @@ func AtoiBase(s string, base string) int {
 			}
 		}
 	}
-	//fmt.Println(index)
 	for i := 0; i < len(index); i++ {
 		n = n + index[i]*pp(x, i)
 	}
