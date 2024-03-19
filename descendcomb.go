@@ -11,7 +11,7 @@ func DescendComb() {
 					o2 := int(y) * 1
 					t1 := int(i) * 10
 					t2 := int(x) * 10
-					if o1 + t1 <= o2 +t2 {
+					if o1+t1 <= o2+t2 {
 						continue
 					}
 					printz01(i)
@@ -19,7 +19,7 @@ func DescendComb() {
 					printz01(' ')
 					printz01(x)
 					printz01(y)
-					if i!= '0' || j!= '1' || x!= '0' || y!= '0'{
+					if i != '0' || j != '1' || x != '0' || y != '0' {
 						printz01(',')
 						printz01(' ')
 					}
@@ -30,7 +30,7 @@ func DescendComb() {
 	printz01('\n')
 }
 
-func printz01 (r rune){
+func printz01(r rune) {
 	z01.PrintRune(r)
 }
 
