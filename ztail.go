@@ -5,6 +5,12 @@ import (
 	"os"
 )
 
+var args []string
+
+func init() {
+	args = os.Args[1:]
+}
+
 func isnum(s string) bool {
 	for _, digit := range s {
 		if digit > '9' || digit < '0' {
@@ -22,34 +28,73 @@ func atoii(s string) int {
 	return n
 }
 
+func exitStatus2(flag string) {
+	if flag == "-c" && len(args) == 1 {
+		fmt.Printf("flag needs an argument: %s\n", flag)
+	} else if flag != "-c" && len(args) == 1 {
+		fmt.Printf("flag provided but not defined: %s\n", flag)
+	} else if len(args) >= 2 {
+		fmt.Printf("invalid value \"%s\" for flag -c: parse error\n", flag)
+	}
+	fmt.Printf("Usage of %s:\n", os.Args[0])
+	fmt.Printf("  -c int\n\toutput the last NUM bytes\n")
+	os.Exit(2)
+}
+
+func printnl(i int, errorindex []int) {
+	if i != len(args)-1 {
+		c := 0
+		for k := 0; k < len(errorindex); k++ {
+			if i == errorindex[k] {
+				c = 1
+				break
+			}
+		}
+		if c == 0 {
+			fmt.Printf("\n")
+		}
+	}
+}
+
 func main() {
-	args := os.Args[1:]
-	if len(args) < 3 {
-		os.Exit(1)
-	} else if args[0] != "-c" {
-		os.Exit(1)
-	} else if !isnum(args[1]) {
+	/**************** Handling Invalid Input ****************/
+	if len(args) == 0 {
+		return
+	}
+	p1 := []rune(args[0])
+	if len(p1) == 0 || p1[0] != '-' {
+		for i := 0; i < len(args); i++ {
+			fmt.Printf("open %s: no such file or directory\n", args[i])
+		}
 		os.Exit(1)
 	}
+	if len(args) == 1 {
+		exitStatus2(string(p1))
+	}
+	if !isnum(args[1]) {
+		exitStatus2(args[1])
+	}
+	/*******************************************************/
 	x := atoii(args[1])
 	errorOccurred := false // this is added so we do continue our loop and we gonna use it lastly to exit lastely using os.Exit(1)
+	errorindex := []int{}
 	for i := 2; i < len(args); i++ { // this loop is for checking errors before printing
 		filePath := args[i]
 		_, err := os.Open(filePath)
 		if err != nil {
 			errorOccurred = true
+			errorindex = append(errorindex, i-1)
 		}
 	}
+	fmt.Println(errorindex)
 	for i := 2; i < len(args); i++ {
 		filePath := args[i]
 		file, err := os.Open(filePath) // open file
 		if err != nil {
 			fmt.Printf("open %s: no such file or directory\n", args[i])
-			if errorOccurred && len(args) >= 4 && i != len(args)-1 {
-				fmt.Printf("\n")
-			}
+			printnl(i, errorindex)
 		} else {
-			defer file.Close() // close file
+			defer file.Close()           // close file
 			fileInfo, err := file.Stat() // get file stat
 			if err != nil {
 				errorOccurred = true
@@ -61,22 +106,18 @@ func main() {
 				errorOccurred = true
 			}
 			runeFile := []rune(string(fileContent))
-			if x > len(runeFile) {
-				fmt.Printf("Number %v exceed %s size\n", x, args[i])
-				errorOccurred = true
-				if i != len(args)-1 {
-					fmt.Printf("\n")
-				}
+
+			if len(args) != 3 {
+				fmt.Printf("==> %s <==\n", args[i])
+			}
+			if len(runeFile) <= x {
+				fmt.Printf(string(fileContent))
+				printnl(i, errorindex)
 			} else {
-				if len(args) != 3 {
-					fmt.Printf("==> %s <==\n", args[i])
-				}
 				for j := len(runeFile) - x; j < len(runeFile); j++ {
 					fmt.Printf("%c", runeFile[j])
 				}
-				if i != len(args)-1 && !errorOccurred {
-					fmt.Printf("\n")
-				}
+				printnl(i, errorindex)
 			}
 		}
 	}
@@ -87,8 +128,9 @@ func main() {
 
 // quest 8
 
-/* Note: the code is simple but a lot of "if"s are
-added just to keep up with the wanted printed results in
-the examples provided. 
-Restriction on using os package and not using ioutil 
-package like we did in cat.go also made the code longer. */
+/* Note: the core of the code is simple but a lot of
+code is added just to keep up with the wanted
+printed results in the examples provided.
+Restriction on using os package and not using ioutil
+package like we did in cat.go also made the code longer.
+*/
