@@ -3,20 +3,20 @@ package main
 import "github.com/01-edu/z01"
 
 func ReduceInt(a []int, f func(int, int) int) {
-	result:= f(a[0], a[1])
+	result := f(a[0], a[1])
 	printnum(result)
 	z01.PrintRune('\n')
 }
 
 func printnum(n int) {
-	if n<0 {
+	if n < 0 {
 		z01.PrintRune('-')
-		n=-n
+		n = -n
 	}
-	if n/10!=0{
-		printnum(n/10)
+	if n/10 != 0 {
+		printnum(n / 10)
 	}
-	z01.PrintRune(rune(n%10)+'0')
+	z01.PrintRune(rune(n%10) + '0')
 }
 
 func main() {
