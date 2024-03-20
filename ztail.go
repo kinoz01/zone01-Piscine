@@ -76,7 +76,7 @@ func main() {
 	}
 	/*******************************************************/
 	x := atoii(args[1])
-	errorOccurred := false // this is added so we do continue our loop and we gonna use it lastly to exit lastely using os.Exit(1)
+	errorOccurred := false // this is added so we do continue our loop and we gonna use it to exit lastely using os.Exit(1)
 	errorindex := []int{}
 	for i := 2; i < len(args); i++ { // this loop is for checking errors before printing
 		filePath := args[i]
