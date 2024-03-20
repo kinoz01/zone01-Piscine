@@ -38,6 +38,18 @@ func PrintNbr2(n int) {
 	}
 }
 
+/****************** NEW Favorite way**************/
+// func printnum(n int) {
+// 	if n<0 {
+// 		z01.PrintRune('-')
+// 		n=-n
+// 	}
+// 	if n/10!=0{
+// 		printnum(n/10)
+// 	}
+// 	z01.PrintRune(rune(n%10)+'0')
+// }
+
 // quest 2 better way for printnbr (itoa) you can make
 
 /****************EXPLANATION**************/
