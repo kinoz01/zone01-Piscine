@@ -28,6 +28,9 @@ func atuoi(str string) int {
 	var n int
 	s := []rune(str)
 	first := true
+	if len(s)==1 && s[0]=='-' || s[0]=='+'{
+		exit = true
+	}
 	for i := 0; i < len(s); i++ {
 		if (s[0] == '-' || s[0] == '+') && first {
 			first = false
@@ -55,7 +58,7 @@ func main() {
 		return
 	}
 	c := 1
-	ituoi(atuoi(num))
+	atuoi(num)
 	if exit {
 		os.Stdout.WriteString("\n")
 		return
