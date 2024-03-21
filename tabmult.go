@@ -2,6 +2,8 @@ package main
 
 import "os"
 
+var exit bool
+
 func ituoi(n int) string {
 	var r string
 	var negative bool
@@ -32,8 +34,7 @@ func atuoi(str string) int {
 			continue
 		}
 		if s[i] < '0' || s[i] > '9' {
-			os.Stdout.WriteString("\n")
-			os.Exit(0)
+			exit = true
 		}
 		n = n*10 + int(s[i]-'0')
 	}
@@ -54,6 +55,11 @@ func main() {
 		return
 	}
 	c := 1
+	ituoi(atuoi(num))
+	if exit {
+		os.Stdout.WriteString("\n")
+		return
+	}
 	for i := '1'; i <= '9'; i++ {
 		os.Stdout.WriteString(string(i) + " x " + num + " = " + ituoi(atuoi(num)*c) + "\n")
 		c++
