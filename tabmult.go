@@ -28,7 +28,7 @@ func atuoi(str string) int {
 	var n int
 	s := []rune(str)
 	first := true
-	if len(s)==1 && s[0]=='-' || s[0]=='+'{
+	if len(s) == 1 && s[0] == '-' || s[0] == '+' {
 		exit = true
 	}
 	for i := 0; i < len(s); i++ {
