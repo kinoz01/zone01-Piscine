@@ -70,6 +70,7 @@ func main() {
 }
 
 // checkpoint / atoi / itoa
+
 /* since I don't know allowed packages I am trying to 
 use minimum package if you can use fmt then you won't need
 itoa function to reconvert to a string
