@@ -12,8 +12,8 @@ func Split(s, sep string) []string {
 			}
 			startIndex = i + len(sep)
 			// i+=len(sep) // ADD THIS LINE TO INCLUDE THE "sep"
-		} else if i+len(sep) == len(s) { // treating the case of the last word in case the string doesn't end with "sep"
-			r = append(r, s[startIndex:])
+		} else if i+len(sep) == len(s) { // if len s[i:i+len(sp)]!= sep and i+len(sp)=len(s) (WHIICH MEANS we are at the last iteration) WHIICH MEANS if len s[len(s)-len(sep):len(s))]!= sep WHIICH MEANS if the end of the string doesn't end with a sep
+			r = append(r, s[startIndex:]) // in this case append all to the end
 		}
 	}
 	return r
@@ -22,7 +22,7 @@ func Split(s, sep string) []string {
 func main() {
 	s := "HAHelloHAHAHAHAhowHAHAareHAyou?HAHA"
 	// s := "HelloHAhowHAareHAyou?" they apparently only tested this base case this is why "wrong" answer may also work
-	fmt.Printf("%#v\n", Split(s, "HA"))
+	fmt.Printf("%#v\n", Split(s, "HA")) // this line allow us to see clearly how and why we added the condition "if s[index:i]!=""{" above
 }
 
 // quest 7 / checkpoint
