@@ -14,7 +14,6 @@ func printStrslice(sc []string) string {
 	return f
 }
 
-
 func sliceStringEveryN2(s string, n int) []string {
 	var result []string
 	star := 0
