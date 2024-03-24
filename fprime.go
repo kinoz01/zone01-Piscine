@@ -21,7 +21,7 @@ func it(n int) string {
 
 func main() {
 	args := os.Args[1:]
-	if len(args) != 1 || args[0] == "" {
+	if len(args) != 1 {
 		return
 	}
 	s := args[0]
