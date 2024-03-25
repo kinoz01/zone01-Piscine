@@ -12,7 +12,7 @@ func main() {
 	for i := len(sliceA) - 1; i >= 0; i-- {
 		if sliceA[i] != ' ' {
 			r = append(r, sliceA[i])
-		} else if len(r) != 0 && sliceA[i] == ' ' {
+		} else if len(r) != 0 { // if sliceA[i] == ' ' and r is not empty
 			break
 		}
 	}
