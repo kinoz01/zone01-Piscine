@@ -49,7 +49,6 @@ func main() {
 					f += "(" + string(roms[i][1]) + "-" + string(roms[i][0]) + ")"
 				} else {
 					f += roms[i]
-
 				}
 				r += roms[i]
 			}
