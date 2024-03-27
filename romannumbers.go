@@ -52,7 +52,6 @@ func main() {
 				}
 				r += roms[i]
 			}
-
 		}
 	}
 	os.Stdout.WriteString(f + "\n")
