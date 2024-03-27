@@ -27,7 +27,7 @@ func main() {
 	rom := []int{1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1}
 	roms := []string{"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"}
 	t := []int{}
-	var f string // formulat breakdown string
+	var f string // formula breakdown string
 	var r string // resulting number string
 	for i := 0; i < len(rom); i++ {
 		if n >= rom[i] {
