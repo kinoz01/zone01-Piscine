@@ -54,6 +54,9 @@ func printnl(i int, errorindex []int) {
 			fmt.Printf("\n")
 		}
 	}
+	if len(args) == 3 {
+		fmt.Printf("\n")
+	}
 }
 
 func main() {
@@ -86,7 +89,7 @@ func main() {
 			errorindex = append(errorindex, i-1)
 		}
 	}
-	fmt.Println(errorindex)
+	// fmt.Println(errorindex)
 	for i := 2; i < len(args); i++ {
 		filePath := args[i]
 		file, err := os.Open(filePath) // open file
