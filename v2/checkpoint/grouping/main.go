@@ -32,7 +32,6 @@ func main() {
 			}
 		}
 	}
-	//fmt.Println(result)
 	for i, w := range result {
 		os.Stdout.WriteString(Itoi(i+1) + ": " + w + "\n")
 	}
