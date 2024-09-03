@@ -49,11 +49,11 @@ func print(nbr int, patter []roman) (string, string) {
 			nbr -= v.num
 		}
 	}
-	sumRomanDigit = formatsum(sumRomanDigit, patter)
+	sumRomanDigit = formatsum(sumRomanDigit)
 	return sumRomanDigit, result
 }
 
-func formatsum(a string, patter []roman) string {
+func formatsum(a string) string {
 	result2 := strings.Split(a, "+")
 
 	for i, v := range result2 {

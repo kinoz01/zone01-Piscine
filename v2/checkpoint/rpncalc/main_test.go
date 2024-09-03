@@ -4,7 +4,10 @@ import (
 	"bytes"
 	"fmt"
 	"os/exec"
+	"strconv"
 	"testing"
+
+	"github.com/01-edu/go-tests/lib/random"
 )
 
 // ANSI escape codes for coloring
@@ -14,59 +17,80 @@ const (
 	ColorGreen  = "\033[32m"
 	ColorYellow = "\033[33m"
 	ColorBlue   = "\033[34m"
-	ColorCyan   = "\033[36m"
-	ColorWhite  = "\033[37m"
 )
 
-// Test cases for the Reverse Polish Notation (RPN) calculator
+// Initial test cases based on the provided arguments
 var testCases = []struct {
-	input    string
-	expected string
+	args []string
 }{
-	{"3 4 +", "7\n"},
-	{"10 2 /", "5\n"},
-	{"2 3 + 5 *", "25\n"},
-	{"5 1 2 + 4 * + 3 -", "14\n"},
-	{"15 7 1 1 + - / 3 * 2 1 1 + + -", "5\n"},
-	{"5 1 2 + 4 * + 3 - 7 /", "Error\n"},
-	{"1 2 3 +", "Error\n"},
-	{"3 4", "Error\n"},
-	{"3 +", "Error\n"},
-	{"", "Error\n"},
-	{"3 3 + +", "Error\n"},
-	{"100 200 + 2 / 5 * 7 +", "757\n"},
-	{"5 2 4 * + 7 -", "Error\n"},
+	{[]string{"1"}},
+	{[]string{"1 2 * 3 * 4 +"}},
+	{[]string{"3 1 2 * * 4 %"}},
+	{[]string{"5 10 9 / - 50 *"}},
+	{[]string{"32   / 22"}},
+	{[]string{"88 67 dks -"}},
+	{[]string{"     1      3 * 2 -"}},
+	{[]string{"1", ""}},
 }
 
-// Helper function to run the Go program and capture the output
-func runGoProgram(args string) (string, error) {
-	cmd := exec.Command("go", "run", "main.go", args)
+// Add random generated test cases based on the provided logic
+func init() {
+	ops := []string{"+", "-", "/", "*", "%"}
+
+	for i := 0; i < 6; i++ {
+		str := ""
+		for j := 0; j < random.IntBetween(3, 10); j++ {
+			if j%2 == 0 && j != 0 {
+				str += ops[random.IntBetween(0, len(ops)-1)] + " "
+			} else {
+				str += strconv.Itoa(random.IntBetween(1, 100)) + " "
+			}
+		}
+		testCases = append(testCases, struct{ args []string }{[]string{str}})
+	}
+}
+
+// Helper function to run a Go file as a separate process and capture the output
+func runGoFile(dir, filename string, args ...string) (string, error) {
+	cmd := exec.Command("go", append([]string{"run", filename}, args...)...)
+	cmd.Dir = dir
 	var out bytes.Buffer
 	cmd.Stdout = &out
-	cmd.Stderr = &out
 	err := cmd.Run()
 	return out.String(), err
 }
 
-func TestRPNCalculator(t *testing.T) {
-	fmt.Printf("%sRunning tests with the following cases:%s\n", ColorCyan, ColorReset)
-	for i, tc := range testCases {
-		fmt.Printf("%sTest Case %d%s:\n", ColorBlue, i+1, ColorReset)
-		fmt.Printf("%sInput = '%s', Expected Output = '%s'%s\n", ColorYellow, tc.input, tc.expected, ColorReset)
-	}
+// Function to print the case number, input, and expected output
+func printCaseDetails(caseNumber int, args []string, expectedOutput string) {
+	fmt.Printf("%sCase Number:%s %d\n", ColorBlue, ColorReset, caseNumber)
+	fmt.Printf("%sInput:%s %v\n", ColorYellow, ColorReset, args)
+	fmt.Printf("%sExpected Output:%s %s", ColorGreen, ColorReset, expectedOutput)
+}
 
+func TestPrograms(t *testing.T) {
 	for i, tc := range testCases {
 		t.Run(fmt.Sprintf("Test Case %d", i+1), func(t *testing.T) {
-			output, err := runGoProgram(tc.input)
+			// Run the first program located in the "solution" directory to get expected output
+			expectedOutput, err := runGoFile("solution", "main.go", tc.args...)
 			if err != nil {
-				t.Fatalf("%sProgram execution failed:%s %v", ColorRed, ColorReset, err)
+				t.Fatalf("%sSolution program failed:%s %v", ColorRed, ColorReset, err)
+			}
+
+			// Print the case details
+			printCaseDetails(i+1, tc.args, expectedOutput)
+
+			// Run the second program located in the current directory
+			mainOutput, err := runGoFile(".", "main.go", tc.args...)
+			if err != nil {
+				t.Fatalf("%sMain program failed:%s %v", ColorRed, ColorReset, err)
 			}
 
 			// Compare the outputs
-			if output != tc.expected {
-				t.Errorf("%sOutputs differ:\n%sExpected:\n%s%s\n%sGot:\n%s%s", ColorRed, ColorYellow, ColorReset, tc.expected, ColorYellow, ColorReset, output)
+			if mainOutput != expectedOutput {
+				t.Errorf("%sOutputs differ for input %v:\n%sExpected (Solution):\n%s%s\n%sGot (Main):\n%s%s",
+					ColorRed, tc.args, ColorYellow, ColorReset, expectedOutput, ColorYellow, ColorReset, mainOutput)
 			} else {
-				fmt.Printf("%sOutputs match for Test Case %d!%s\n", ColorGreen, i+1, ColorReset)
+				fmt.Printf("%sTest Case %d passed!%s\n\n", ColorGreen, i+1, ColorReset)
 			}
 		})
 	}

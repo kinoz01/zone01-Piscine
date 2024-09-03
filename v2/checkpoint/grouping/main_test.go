@@ -32,6 +32,7 @@ var testCases = []struct {
 	{"(s)", ""},
 	{"i", "Something in the air"},
 	{"(|)", "hello"},
+	{"(|)", ""},
 	{validRegExp(2), random.Str(chars.Words, 60)},
 	{validRegExp(2), random.Str(chars.Words, 60)},
 	{validRegExp(6), random.Str(chars.Words, 60)},
