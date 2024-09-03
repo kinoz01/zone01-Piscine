@@ -1,2 +1,4 @@
 github.com/01-edu/go-tests v0.0.0-20240731140844-c20fcf057294 h1:I0EcQV85TL9FtNG2XODXKzq/yAd07mwjZSV4wLPCw+A=
 github.com/01-edu/go-tests v0.0.0-20240731140844-c20fcf057294/go.mod h1:IYzuZWohzjAyod6PZ/oOxLeUFhf9yb361OVWWUqSgyM=
+github.com/01-edu/z01 v0.1.0 h1:Rr1p92CKYXUgVFw872iGDABXpdkuKf2jmS+KV6r1034=
+github.com/01-edu/z01 v0.1.0/go.mod h1:BH7t35JaNFuP83rTJDc5nkSfgmC/HYVcJsUcdFqYZNo=
