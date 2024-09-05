@@ -4,9 +4,9 @@ import (
 	"bytes"
 	"fmt"
 	"os/exec"
-	"strconv"
 	"testing"
 
+	"github.com/01-edu/go-tests/lib/chars"
 	"github.com/01-edu/go-tests/lib/random"
 )
 
@@ -19,24 +19,24 @@ const (
 	ColorBlue   = "\033[34m"
 )
 
-// Initial test cases based on the provided table
+// Initial test cases based on the provided string pairs
 var testCases = []struct {
-	args []string
+	args [2]string
 }{
-	{[]string{"0"}},
-	{[]string{"4000"}},
-	{[]string{"5000"}},
-	{[]string{"12433"}},
-	{[]string{"hello"}},
-	{[]string{"good luck"}},
-	{[]string{"12", "15"}},
+	{[2]string{"fgex.;", "tyf34gdgf;'ektufjhgdgex.;.;rtjynur6"}},
+	{[2]string{"abc", "2altrb53c.sse"}},
+	{[2]string{"abc", "btarc"}},
+	{[2]string{"DD", "DABC"}},
+	{[2]string{""}},
 }
 
-// Add random integer test cases to the table
+// Add random string pairs to the test cases
 func init() {
-	for i := 0; i < 7; i++ {
-		randomValue := strconv.Itoa(random.IntBetween(0, 4000))
-		testCases = append(testCases, struct{ args []string }{[]string{randomValue}})
+	for i := 0; i < 5; i++ {
+		testCases = append(testCases,
+			struct{ args [2]string }{[2]string{random.Str(chars.Lower, 1), random.Str(chars.Lower, 13)}},
+			struct{ args [2]string }{[2]string{random.Str(chars.Upper, 1), random.Str(chars.Upper, 13)}},
+		)
 	}
 }
 
@@ -50,8 +50,8 @@ func runGoFile(dir, filename string, args ...string) (string, error) {
 	return out.String(), err
 }
 
-// Function to print the case number, input, expected output, and your output
-func printCaseDetails(caseNumber int, args []string, expectedOutput, yourOutput string) {
+// Function to print the case number, input, and expected output
+func printCaseDetails(caseNumber int, args [2]string, expectedOutput, yourOutput string) {
 	fmt.Printf("%sCase Number:%s %d\n", ColorBlue, ColorReset, caseNumber)
 	fmt.Printf("%sInput:%s %v\n", ColorYellow, ColorReset, args)
 	fmt.Printf("%sExpected Output:%s %s", ColorGreen, ColorReset, expectedOutput)
@@ -62,13 +62,13 @@ func TestPrograms(t *testing.T) {
 	for i, tc := range testCases {
 		t.Run(fmt.Sprintf("Test Case %d", i+1), func(t *testing.T) {
 			// Run the first program located in the "solution" directory to get expected output
-			expectedOutput, err := runGoFile("solution", "main.go", tc.args...)
+			expectedOutput, err := runGoFile("solution", "main.go", tc.args[:]...)
 			if err != nil {
 				t.Fatalf("%sSolution program failed:%s %v", ColorRed, ColorReset, err)
 			}
 
 			// Run the second program located in the current directory
-			mainOutput, err := runGoFile(".", "main.go", tc.args...)
+			mainOutput, err := runGoFile(".", "main.go", tc.args[:]...)
 			if err != nil {
 				t.Fatalf("%sMain program failed:%s %v", ColorRed, ColorReset, err)
 			}

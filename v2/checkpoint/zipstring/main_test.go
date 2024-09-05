@@ -1,7 +1,7 @@
 package main
 
 import (
-	"checkpoint/checknumber/solution"
+	"checkpoint/zipstring/solution" // Replace with the correct package path
 	"fmt"
 	"strconv"
 	"testing"
@@ -19,38 +19,35 @@ const (
 	ColorUnderline = "\033[4m"
 )
 
-func TestCheckNumberFunctions(t *testing.T) {
+func TestZipString(t *testing.T) {
 	// Predefined test cases
 	args := []string{
-		"123",
-		"H1ll0",
+		"aaaa",
+		"zzzzzZZZZZZ",
 		"",
-		"1",
-		"1.1",
-		"Containe1number",
-		"     ",
-		"upson lorem ipsum",
+		"ziiiiipMeee",
+		"hhellloTthereYouuunggFelllas",
 	}
 
-	fmt.Printf("%sRunning CheckNumber tests with the following inputs:%s\n", ColorCyan, ColorReset)
+	fmt.Printf("%sRunning ZipString tests with the following inputs:%s\n", ColorCyan, ColorReset)
 
 	for i, val := range args {
 		t.Run("Test_"+strconv.Itoa(i), func(t *testing.T) {
-			// Run the CheckNumber function in solution/main.go to get the expected result
-			expectedResult := solution.CheckNumber(val)
+			// Run the ZipString function in solution/main.go to get the expected result
+			expectedResult := solution.ZipString(val)
 
 			// Print the input and the expected result
 			fmt.Printf("%sTest %d: Input = '%s'%s\n", ColorBlue, i+1, val, ColorReset)
-			fmt.Printf("%sExpected CheckNumber Output: %t%s\n", ColorYellow, expectedResult, ColorReset)
+			fmt.Printf("%sExpected Output: %s%s\n", ColorYellow, expectedResult, ColorReset)
 
-			// Run the CheckNumber function in main.go
-			mainResult := CheckNumber(val)
-			fmt.Printf("%sYour CheckNumber Output: %t%s\n", ColorYellow, mainResult, ColorReset)
+			// Run the ZipString function in main.go
+			mainResult := ZipString(val)
+			fmt.Printf("%sYour Output: %s%s\n", ColorYellow, mainResult, ColorReset)
 
 			// Compare the results
 			if mainResult != expectedResult {
 				fmt.Printf("%s%sMismatch for input '%s'%s\n\n", ColorRed, ColorBold, val, ColorReset)
-				t.Errorf("%sMismatch Details:%s\nYour CheckNumber() = %t\nExpected CheckNumber() = %t", ColorRed, ColorReset, mainResult, expectedResult)
+				t.Errorf("%sMismatch Details:%s\nYour ZipString() = %s\nExpected = %s", ColorRed, ColorReset, mainResult, expectedResult)
 			} else {
 				fmt.Printf("%s%sMatch! The outputs are identical.%s\n\n", ColorGreen, ColorBold, ColorReset)
 			}

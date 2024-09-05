@@ -8,6 +8,7 @@ import (
 	"testing"
 
 	"github.com/01-edu/go-tests/lib/random"
+	"github.com/01-edu/go-tests/lib/is"
 )
 
 // ANSI escape codes for coloring
@@ -19,24 +20,29 @@ const (
 	ColorBlue   = "\033[34m"
 )
 
-// Initial test cases based on the provided table
+// Initial test cases
 var testCases = []struct {
 	args []string
 }{
-	{[]string{"0"}},
-	{[]string{"4000"}},
-	{[]string{"5000"}},
-	{[]string{"12433"}},
-	{[]string{"hello"}},
-	{[]string{"good luck"}},
-	{[]string{"12", "15"}},
+	// Special cases
+	{[]string{}},
+	{[]string{`""`}},
+	{[]string{"1", "2"}},
 }
 
-// Add random integer test cases to the table
+// Add random numbers and primes between 0 and 100
 func init() {
-	for i := 0; i < 7; i++ {
-		randomValue := strconv.Itoa(random.IntBetween(0, 4000))
-		testCases = append(testCases, struct{ args []string }{[]string{randomValue}})
+	// Adds random numbers between 1 and 10000
+	args := random.IntSliceBetween(1, 10000)
+	for _, num := range args {
+		testCases = append(testCases, struct{ args []string }{[]string{strconv.Itoa(num)}})
+	}
+
+	// Add all prime numbers between 0 and 100
+	for i := 0; i < 100; i++ {
+		if is.Prime(i) {
+			testCases = append(testCases, struct{ args []string }{[]string{strconv.Itoa(i)}})
+		}
 	}
 }
 
@@ -50,7 +56,7 @@ func runGoFile(dir, filename string, args ...string) (string, error) {
 	return out.String(), err
 }
 
-// Function to print the case number, input, expected output, and your output
+// Function to print the case number, input, and expected output
 func printCaseDetails(caseNumber int, args []string, expectedOutput, yourOutput string) {
 	fmt.Printf("%sCase Number:%s %d\n", ColorBlue, ColorReset, caseNumber)
 	fmt.Printf("%sInput:%s %v\n", ColorYellow, ColorReset, args)

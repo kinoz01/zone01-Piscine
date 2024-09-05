@@ -23,19 +23,24 @@ const (
 var testCases = []struct {
 	args []string
 }{
-	{[]string{"0"}},
-	{[]string{"4000"}},
-	{[]string{"5000"}},
-	{[]string{"12433"}},
+	{[]string{" "}},
+	{[]string{"1"}},
+	{[]string{"1 1"}},
 	{[]string{"hello"}},
-	{[]string{"good luck"}},
-	{[]string{"12", "15"}},
+	{[]string{"p 1"}},
+	{[]string{"804577"}},
+	{[]string{"225225"}},
+	{[]string{"8333325"}},
+	{[]string{"42"}},
+	{[]string{"9539"}},
+	{[]string{"1000002"}},
+	{[]string{"1000003"}},
 }
 
 // Add random integer test cases to the table
 func init() {
-	for i := 0; i < 7; i++ {
-		randomValue := strconv.Itoa(random.IntBetween(0, 4000))
+	for i := 0; i < 10; i++ {
+		randomValue := strconv.Itoa(random.IntBetween(1, 100))
 		testCases = append(testCases, struct{ args []string }{[]string{randomValue}})
 	}
 }
@@ -50,7 +55,7 @@ func runGoFile(dir, filename string, args ...string) (string, error) {
 	return out.String(), err
 }
 
-// Function to print the case number, input, expected output, and your output
+// Function to print the case number, input, and expected output
 func printCaseDetails(caseNumber int, args []string, expectedOutput, yourOutput string) {
 	fmt.Printf("%sCase Number:%s %d\n", ColorBlue, ColorReset, caseNumber)
 	fmt.Printf("%sInput:%s %v\n", ColorYellow, ColorReset, args)

@@ -4,10 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"os/exec"
-	"strconv"
 	"testing"
-
-	"github.com/01-edu/go-tests/lib/random"
 )
 
 // ANSI escape codes for coloring
@@ -19,25 +16,19 @@ const (
 	ColorBlue   = "\033[34m"
 )
 
-// Initial test cases based on the provided table
+// Test cases based on your provided examples
 var testCases = []struct {
 	args []string
 }{
-	{[]string{"0"}},
-	{[]string{"4000"}},
-	{[]string{"5000"}},
-	{[]string{"12433"}},
-	{[]string{"hello"}},
-	{[]string{"good luck"}},
-	{[]string{"12", "15"}},
-}
-
-// Add random integer test cases to the table
-func init() {
-	for i := 0; i < 7; i++ {
-		randomValue := strconv.Itoa(random.IntBetween(0, 4000))
-		testCases = append(testCases, struct{ args []string }{[]string{randomValue}})
-	}
+	{[]string{" "}},
+	{[]string{"123", "123"}},
+	{[]string{"abc", "abc"}},
+	{[]string{"ac", "abc"}},
+	{[]string{"13", "123"}},
+	{[]string{"faya", "fgvvfdxcacpolhyghbreda"}},
+	{[]string{"faya", "fgvvfdxcacpolhyghbred"}},
+	{[]string{"error", "rrerrrfiiljdfxjyuifrrvcoojh"}},
+	{[]string{"error", "rrerrrfiiljdfxjyuifrrvcoojrh"}},
 }
 
 // Helper function to run a Go file as a separate process and capture the output
@@ -50,7 +41,7 @@ func runGoFile(dir, filename string, args ...string) (string, error) {
 	return out.String(), err
 }
 
-// Function to print the case number, input, expected output, and your output
+// Function to print the case number, input, and expected output
 func printCaseDetails(caseNumber int, args []string, expectedOutput, yourOutput string) {
 	fmt.Printf("%sCase Number:%s %d\n", ColorBlue, ColorReset, caseNumber)
 	fmt.Printf("%sInput:%s %v\n", ColorYellow, ColorReset, args)

@@ -1,12 +1,13 @@
+
 package main
 
 import (
 	"bytes"
 	"fmt"
 	"os/exec"
-	"strconv"
 	"testing"
 
+	"github.com/01-edu/go-tests/lib/chars"
 	"github.com/01-edu/go-tests/lib/random"
 )
 
@@ -19,25 +20,30 @@ const (
 	ColorBlue   = "\033[34m"
 )
 
-// Initial test cases based on the provided table
+// Test cases based on your provided examples and additional random cases
 var testCases = []struct {
 	args []string
 }{
-	{[]string{"0"}},
-	{[]string{"4000"}},
-	{[]string{"5000"}},
-	{[]string{"12433"}},
-	{[]string{"hello"}},
-	{[]string{"good luck"}},
-	{[]string{"12", "15"}},
+	{[]string{"zpadinton", "paqefwtdjetyiytjneytjoeyjnejeyj"}},
+	{[]string{"ddf6vewg64f", "gtwthgdwthdwfteewhrtag6h4ffdhsd"}},
+	{[]string{""}},
+	{[]string{"rien", "cette phrase ne cache rien"}},
+	{[]string{" this is ", " wait shr"}},
+	{[]string{"more", "then", "two", "arguments"}},
 }
 
-// Add random integer test cases to the table
+// Add random alphanumeric test cases with multiple arguments
 func init() {
-	for i := 0; i < 7; i++ {
-		randomValue := strconv.Itoa(random.IntBetween(0, 4000))
-		testCases = append(testCases, struct{ args []string }{[]string{randomValue}})
-	}
+	s1 := random.Str(chars.Alnum, 13)
+	s2 := random.Str(chars.Alnum, 13) + s1 + random.Str(chars.Alnum, 13)
+
+	// Add the specific case involving s1 and s2
+	testCases = append(testCases, struct{ args []string }{[]string{s1, s2}})
+
+	// Add more random cases
+	testCases = append(testCases, struct{ args []string }{
+		[]string{random.Str(chars.Alnum, 13), random.Str(chars.Alnum, 13)},
+	})
 }
 
 // Helper function to run a Go file as a separate process and capture the output
@@ -50,7 +56,7 @@ func runGoFile(dir, filename string, args ...string) (string, error) {
 	return out.String(), err
 }
 
-// Function to print the case number, input, expected output, and your output
+// Function to print the case number, input, and expected output
 func printCaseDetails(caseNumber int, args []string, expectedOutput, yourOutput string) {
 	fmt.Printf("%sCase Number:%s %d\n", ColorBlue, ColorReset, caseNumber)
 	fmt.Printf("%sInput:%s %v\n", ColorYellow, ColorReset, args)

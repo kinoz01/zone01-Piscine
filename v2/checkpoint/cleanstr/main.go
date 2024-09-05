@@ -11,5 +11,4 @@ func main() {
 		return
 	}
 	os.Stdout.WriteString(strings.Join(strings.Fields(os.Args[1]), " ") + "\n")
-
 }

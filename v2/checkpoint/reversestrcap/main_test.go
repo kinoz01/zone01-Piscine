@@ -4,9 +4,9 @@ import (
 	"bytes"
 	"fmt"
 	"os/exec"
-	"strconv"
 	"testing"
 
+	"github.com/01-edu/go-tests/lib/chars"
 	"github.com/01-edu/go-tests/lib/random"
 )
 
@@ -19,24 +19,19 @@ const (
 	ColorBlue   = "\033[34m"
 )
 
-// Initial test cases based on the provided table
+// Test cases based on your provided examples and additional random cases
 var testCases = []struct {
 	args []string
 }{
-	{[]string{"0"}},
-	{[]string{"4000"}},
-	{[]string{"5000"}},
-	{[]string{"12433"}},
-	{[]string{"hello"}},
-	{[]string{"good luck"}},
-	{[]string{"12", "15"}},
+	{[]string{"First SMALL TesT"}},
+	{[]string{"SEconD Test IS a LItTLE EasIEr", "bEwaRe IT'S NoT HARd WhEN", "Go a dernier 0123456789 for the road e"}},
+	{[]string{""}},
 }
 
-// Add random integer test cases to the table
+// Add random alphanumeric test cases with multiple arguments
 func init() {
-	for i := 0; i < 7; i++ {
-		randomValue := strconv.Itoa(random.IntBetween(0, 4000))
-		testCases = append(testCases, struct{ args []string }{[]string{randomValue}})
+	for i := 0; i < 15; i++ {
+		testCases = append(testCases, struct{ args []string }{random.StrSlice(chars.Alnum)})
 	}
 }
 
@@ -50,7 +45,7 @@ func runGoFile(dir, filename string, args ...string) (string, error) {
 	return out.String(), err
 }
 
-// Function to print the case number, input, expected output, and your output
+// Function to print the case number, input, and expected output
 func printCaseDetails(caseNumber int, args []string, expectedOutput, yourOutput string) {
 	fmt.Printf("%sCase Number:%s %d\n", ColorBlue, ColorReset, caseNumber)
 	fmt.Printf("%sInput:%s %v\n", ColorYellow, ColorReset, args)
