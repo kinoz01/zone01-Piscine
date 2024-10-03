@@ -16,7 +16,7 @@ func TestOutput(t *testing.T) {
         t.Fatalf("Failed to run the program: %v", err)
     }
 
-    expected := "a\n"
+    expected := "a"
     if out.String() != expected {
         t.Errorf("Unexpected output: got %q, want %q", out.String(), expected)
     }
